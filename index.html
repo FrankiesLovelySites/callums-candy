@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#123b68">
+	<meta name="description" content="Discover sour sweets, fruity favourites, pick-and-mix and surprise boxes at Callum's Candy.">
+	<title>Callum's Candy | Sweet shop</title>
+	<style>
+		:root {
+			--blue: #2467a8;
+			--blue-dark: #123b68;
+			--blue-light: #e8f3ff;
+			--halloween-orange: #f28c28;
+			--halloween-purple: #34213f;
+			--cream: #f7fbff;
+			--ink: #172b40;
+			--muted: #607487;
+			--white: #fff;
+			--line: #dce8f2;
+			--shadow: 0 16px 40px rgb(23 56 88 / 10%);
+		}
+
+		* { box-sizing: border-box; }
+		html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+		body {
+			margin: 0;
+			color: var(--ink);
+			background: var(--cream);
+			font-family: Arial, Helvetica, sans-serif;
+			line-height: 1.6;
+		}
+		button, a { -webkit-tap-highlight-color: transparent; }
+		a { color: inherit; }
+		button { font: inherit; }
+		.site-header {
+			position: sticky;
+			z-index: 10;
+			top: 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 24px;
+			min-height: 76px;
+			padding: 12px max(4%, calc((100% - 1160px) / 2));
+			background: rgb(255 255 255 / 95%);
+			border-bottom: 1px solid var(--line);
+			backdrop-filter: blur(14px);
+		}
+		.brand { color: var(--ink); font-size: 1.35rem; font-weight: 900; letter-spacing: -.05em; text-decoration: none; }
+		.brand span { color: var(--blue); }
+		nav { display: flex; align-items: center; gap: 26px; }
+		nav a { font-size: .94rem; font-weight: 800; text-decoration: none; transition: color .2s ease; }
+		nav a:hover { color: var(--blue); }
+		.bag-link {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 9px 15px;
+			border: 1px solid var(--blue-dark);
+			border-radius: 999px;
+			background: var(--blue-dark);
+			color: var(--white);
+			font-weight: 800;
+			text-decoration: none;
+			transition: transform .2s ease, background .2s ease;
+		}
+		.bag-link:hover { transform: translateY(-2px); background: var(--blue); }
+		.bag-count {
+			display: inline-grid;
+			width: 23px;
+			height: 23px;
+			place-items: center;
+			border-radius: 50%;
+			background: var(--white);
+			color: var(--blue-dark);
+			font-size: .78rem;
+		}
+		.halloween-banner {
+			position: relative;
+			z-index: 9;
+			padding: 10px 16px;
+			background: linear-gradient(90deg, #261a32, #493050 52%, #261a32);
+			color: var(--white);
+			font-size: .83rem;
+			font-weight: 900;
+			letter-spacing: .1em;
+			text-align: center;
+			text-transform: uppercase;
+		}
+		.halloween-banner::after { position: absolute; right: 0; bottom: 0; left: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--halloween-orange), transparent); content: ""; }
+		.hero {
+			position: relative;
+			overflow: hidden;
+			padding: clamp(70px, 10vw, 130px) 20px 100px;
+			background: linear-gradient(115deg, #123b68 0%, #2467a8 47%, #e8f3ff 100%);
+			color: var(--white);
+			text-align: center;
+			isolation: isolate;
+		}
+		.hero-inner { max-width: 790px; margin: auto; animation: arrive .75s both; }
+		h1, h2, h3, p { overflow-wrap: anywhere; }
+		h1 { max-width: 760px; margin: 0 auto; font-size: clamp(2.8rem, 8vw, 6rem); line-height: .99; letter-spacing: -.075em; }
+		.hero h1 span { color: #d6eaff; }
+		.hero-copy { max-width: 590px; margin: 22px auto 30px; color: #edf6ff; font-size: clamp(1.05rem, 2.4vw, 1.22rem); }
+		.button {
+			display: inline-flex;
+			min-height: 50px;
+			align-items: center;
+			justify-content: center;
+			gap: 9px;
+			padding: 12px 23px;
+			border: 2px solid var(--blue-dark);
+			border-radius: 999px;
+			background: var(--blue-dark);
+			color: var(--white);
+			font-weight: 900;
+			text-decoration: none;
+			cursor: pointer;
+			transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+		}
+		.button:hover { transform: translateY(-3px); box-shadow: 0 8px 0 rgb(18 59 104 / 14%); background: var(--blue); }
+		.button:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #2375a6; outline-offset: 3px; }
+		.button-light { border-color: var(--white); background: var(--white); color: var(--blue-dark); }
+		.button-light:hover { background: var(--blue-light); color: var(--blue-dark); }
+		.perks {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 14px;
+			width: min(1000px, 92%);
+			margin: -35px auto 0;
+			position: relative;
+			z-index: 1;
+		}
+		.perk {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 11px;
+			min-height: 76px;
+			padding: 14px;
+			border: 1px solid var(--line);
+			border-radius: 16px;
+			background: var(--white);
+			box-shadow: var(--shadow);
+			font-size: .91rem;
+			font-weight: 800;
+		}
+		.perk span { width: 9px; height: 9px; flex: 0 0 auto; border-radius: 50%; background: var(--blue); }
+		main { width: min(1160px, 92%); margin: auto; }
+		.shop-section { padding: 92px 0 74px; }
+		.section-heading { max-width: 650px; margin: 0 auto 35px; text-align: center; }
+		.kicker { margin: 0 0 7px; color: var(--blue); font-size: .78rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+		.section-title { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -.055em; }
+		.section-intro { margin: 12px 0 0; color: var(--muted); }
+		.filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; margin: 0 0 26px; }
+		.filter-button { padding: 9px 16px; border: 1px solid #cbd9e7; border-radius: 999px; background: var(--white); color: var(--ink); font-size: .9rem; font-weight: 800; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+		.filter-button:hover { transform: translateY(-2px); border-color: var(--blue); }
+		.filter-button[aria-pressed="true"] { border-color: var(--blue-dark); background: var(--blue-dark); color: var(--white); }
+		.filter-status { min-height: 1.5em; margin: -17px 0 18px; color: var(--muted); font-size: .82rem; text-align: center; }
+		.shop-layout { display: grid; grid-template-columns: minmax(0, 1fr) 310px; align-items: start; gap: 26px; }
+		.product-column { min-width: 0; }
+		.products { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+		.product-card {
+			overflow: hidden;
+			border: 1px solid var(--line);
+			border-radius: 20px;
+			background: var(--white);
+			box-shadow: 0 7px 22px rgb(23 56 88 / 5%);
+			transition: transform .25s ease, box-shadow .25s ease;
+		}
+		.product-card:hover { transform: translateY(-6px) rotate(-.3deg); box-shadow: var(--shadow); }
+		.product-art {
+			display: grid;
+			min-height: 180px;
+			place-items: center;
+			position: relative;
+			overflow: hidden;
+			font-size: 1rem;
+			font-weight: 900;
+			letter-spacing: .14em;
+		}
+		.product-art::before, .product-art::after {
+			position: absolute;
+			width: 95px;
+			height: 95px;
+			border: 2px solid rgb(255 255 255 / 46%);
+			border-radius: 50%;
+			content: "";
+		}
+		.product-art::before { top: -40px; right: 12%; }
+		.product-art::after { bottom: -55px; left: 13%; width: 125px; height: 125px; }
+		.product-art span { position: relative; z-index: 1; display: grid; width: 100px; height: 100px; place-items: center; border: 1px solid rgb(255 255 255 / 65%); border-radius: 50%; background: rgb(255 255 255 / 30%); color: var(--blue-dark); animation: bob 3.5s ease-in-out infinite; }
+		.art-jelly { background: linear-gradient(135deg, #b7d9f8, #e2f0ff); }
+		.art-fizz { background: linear-gradient(135deg, #6da7df, #c4e1ff); }
+		.art-fruit { background: linear-gradient(135deg, #d7e9fb, #9bc5ed); }
+		.art-gummies { background: linear-gradient(135deg, #abcff1, #e4f1ff); }
+		.art-surprise { background: linear-gradient(135deg, #123b68, #75abe0); }
+		.art-surprise span { border-color: rgb(255 255 255 / 55%); color: var(--white); }
+		.product-info { padding: 17px; }
+		.product-type { margin: 0 0 3px; color: var(--blue); font-size: .7rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+		.product-info h3 { margin: 0; font-size: 1.13rem; }
+		.stock-status { display: inline-flex; align-items: center; gap: 6px; margin: 9px 0 0; color: #217346; font-size: .78rem; font-weight: 800; }
+		.stock-status::before { display: grid; width: 18px; height: 18px; place-items: center; border-radius: 50%; background: #e3f5e9; content: "✓"; font-size: .75rem; }
+		.stock-status.out-of-stock { color: #a33b3b; }
+		.stock-status.out-of-stock::before { background: #fde8e8; content: "×"; }
+		.product-description { min-height: 48px; margin: 6px 0 14px; color: var(--muted); font-size: .9rem; }
+		.product-buy { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+		.price { font-size: 1.18rem; font-weight: 900; }
+		.price small { color: var(--muted); font-size: .75rem; font-weight: 600; }
+		.add-button {
+			padding: 9px 13px;
+			border: 0;
+			border-radius: 99px;
+			background: var(--blue-light);
+			color: var(--blue-dark);
+			font-weight: 900;
+			cursor: pointer;
+			transition: transform .2s ease, background .2s ease, color .2s ease;
+		}
+		.add-button:hover { transform: scale(1.05); background: var(--blue); color: var(--white); }
+		.add-button:disabled { background: #edf0f3; color: #6b7782; cursor: not-allowed; transform: none; }
+		.cart {
+			position: sticky;
+			top: 96px;
+			padding: 22px;
+			border: 1px solid var(--line);
+			border-radius: 20px;
+			background: var(--white);
+			box-shadow: var(--shadow);
+		}
+		.cart h2 { display: flex; align-items: center; justify-content: space-between; margin: 0 0 5px; font-size: 1.35rem; }
+		.cart-subtitle { margin: 0 0 18px; color: var(--muted); font-size: .88rem; }
+		.cart-empty { padding: 23px 10px; border: 1px dashed #cbd9e7; border-radius: 13px; color: var(--muted); text-align: center; }
+		.cart-empty span { display: block; margin-bottom: 6px; color: var(--blue); font-size: 1.7rem; font-weight: 900; }
+		.cart-items { display: grid; gap: 13px; margin: 0; padding: 0; list-style: none; }
+		.cart-item { display: grid; grid-template-columns: 1fr auto; gap: 4px 10px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+		.cart-item-name { font-weight: 800; line-height: 1.3; }
+		.cart-item-total { font-weight: 900; }
+		.quantity-controls { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: .85rem; }
+		.quantity-controls button {
+			display: grid;
+			width: 25px;
+			height: 25px;
+			place-items: center;
+			border: 1px solid var(--line);
+			border-radius: 50%;
+			background: var(--cream);
+			color: var(--ink);
+			font-weight: 900;
+			cursor: pointer;
+		}
+		.cart-summary { display: flex; justify-content: space-between; margin: 10px 0; color: var(--muted); font-size: .92rem; }
+		.cart-summary strong { color: var(--ink); }
+		.cart-summary.discount { color: var(--blue); }
+		.cart-summary.total { margin-top: 13px; padding-top: 13px; border-top: 1px solid var(--line); color: var(--ink); font-size: 1.05rem; font-weight: 900; }
+		.checkout-button { width: 100%; border: 0; }
+		.checkout-button:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+		.cart-note { min-height: 36px; margin: 11px 0 0; color: var(--muted); font-size: .77rem; text-align: center; }
+		.shipping-note { margin: 12px 0; padding: 10px; border-radius: 10px; background: var(--blue-light); color: var(--blue-dark); font-size: .83rem; font-weight: 700; }
+		.order-form { display: grid; gap: 11px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+		.order-form h3 { margin: 0; font-size: 1rem; }
+		.order-form label { display: grid; gap: 4px; font-size: .8rem; font-weight: 800; }
+		.order-form input { width: 100%; min-height: 40px; padding: 8px 10px; border: 1px solid #cbd9e7; border-radius: 8px; background: var(--white); color: var(--ink); font: inherit; }
+		.order-form .button { width: 100%; }
+		.order-form [role="alert"] { min-height: 1em; margin: 0; color: #a33b3b; font-size: .84rem; }
+		.about {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			gap: 35px;
+			margin: 25px 0 78px;
+			padding: clamp(25px, 5vw, 50px);
+			border-radius: 26px;
+			background: var(--blue-light);
+		}
+		.about h2 { max-width: 440px; margin: 0; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.05; letter-spacing: -.05em; }
+		.about p { margin: 0; color: #465e75; }
+		.about-note { display: block; margin-top: 14px; color: var(--ink); font-size: .9rem; font-weight: 800; }
+		.footer {
+			padding: 35px 20px;
+			background: var(--blue-dark);
+			color: var(--white);
+			text-align: center;
+		}
+		.footer p { margin: 3px 0; color: #e1edf9; font-size: .9rem; }
+		.footer strong { color: var(--white); }
+		.promo-dialog { width: min(460px, calc(100% - 32px)); padding: 0; border: 1px solid rgb(255 255 255 / 26%); border-radius: 24px; background: var(--white); color: var(--ink); box-shadow: 0 24px 90px rgb(0 0 0 / 48%); }
+		.promo-dialog[open] { animation: promo-appear .42s cubic-bezier(.2, .8, .2, 1) both; }
+		.promo-dialog::backdrop { background: rgb(18 10 24 / 76%); backdrop-filter: blur(7px); animation: backdrop-fade .42s ease both; }
+		.promo-content { position: relative; overflow: hidden; padding: 42px 32px 32px; background: radial-gradient(ellipse at 92% 8%, rgb(242 140 40 / 35%), transparent 36%), linear-gradient(145deg, #21172b 0%, var(--halloween-purple) 58%, #653c54 100%); color: var(--white); text-align: center; }
+		.promo-content::before, .promo-content::after { position: absolute; width: 130px; height: 130px; border: 1px solid rgb(242 140 40 / 38%); border-radius: 50%; content: ""; }
+		.promo-content::before { top: -75px; left: -40px; }
+		.promo-content::after { right: -50px; bottom: -90px; width: 190px; height: 190px; border-color: rgb(255 255 255 / 18%); }
+		.promo-close { position: absolute; z-index: 1; top: 12px; right: 14px; display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid rgb(255 255 255 / 46%); border-radius: 50%; background: rgb(255 255 255 / 9%); color: var(--white); font-size: 1.3rem; cursor: pointer; }
+		.promo-kicker { position: relative; z-index: 1; margin: 0 0 10px; color: #ffc078; font-size: .75rem; font-weight: 900; letter-spacing: .18em; text-transform: uppercase; }
+		.promo-content h2 { position: relative; z-index: 1; margin: 0; font-size: clamp(2rem, 8vw, 3.1rem); line-height: 1; letter-spacing: -.05em; }
+		.promo-content p:not(.promo-kicker) { position: relative; z-index: 1; margin: 13px 0 18px; color: #f6edf8; }
+		.promo-code { position: relative; z-index: 1; display: inline-block; padding: 8px 16px; border: 1px dashed #ffc078; border-radius: 8px; background: rgb(242 140 40 / 18%); color: #ffe1bd; font-size: 1.15rem; font-weight: 900; letter-spacing: .16em; }
+		.promo-dismiss { position: relative; z-index: 1; display: block; margin: 18px auto 0; padding: 8px 12px; border: 0; background: transparent; color: var(--white); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+		.reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
+		.reveal.is-visible { opacity: 1; transform: translateY(0); }
+		@keyframes arrive { from { opacity: 0; transform: translateY(20px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+		@keyframes promo-appear { from { opacity: 0; transform: translateY(14px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+		@keyframes backdrop-fade { from { background-color: rgb(18 10 24 / 0%); backdrop-filter: blur(0); } to { background-color: rgb(18 10 24 / 76%); backdrop-filter: blur(7px); } }
+		@keyframes bob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-12px) rotate(4deg); } }
+		@media (max-width: 850px) {
+			.shop-layout { grid-template-columns: 1fr; }
+			.cart { position: static; grid-row: 1; }
+			.products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+		}
+		@media (max-width: 620px) {
+			.site-header { flex-wrap: wrap; justify-content: center; gap: 9px 18px; padding: 10px 4%; }
+			.brand { font-size: 1.2rem; }
+			nav { gap: 14px; }
+			nav a { font-size: .82rem; }
+			.bag-link { padding: 7px 11px; font-size: .84rem; }
+			.halloween-banner { padding: 9px 12px; font-size: .72rem; letter-spacing: .06em; }
+			.hero { padding: 76px 18px 82px; }
+			.perks { grid-template-columns: 1fr; gap: 8px; margin-top: -25px; }
+			.perk { min-height: 55px; justify-content: flex-start; padding-left: 20%; }
+			.shop-section { padding: 70px 0 45px; }
+			.products { gap: 12px; }
+			.product-art { min-height: 125px; font-size: 3.6rem; }
+			.product-info { padding: 13px; }
+			.product-description { min-height: 69px; font-size: .82rem; }
+			.product-buy { align-items: flex-start; flex-direction: column; }
+			.about { grid-template-columns: 1fr; gap: 16px; margin-bottom: 48px; }
+		}
+		@media (max-width: 380px) {
+			.products { grid-template-columns: 1fr; }
+			.product-art { min-height: 170px; }
+			.product-description { min-height: 0; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			*, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+			.reveal { opacity: 1; transform: none; }
+		}
+	</style>
+</head>
+<body>
+	<header class="site-header">
+		<a class="brand" href="#home" aria-label="Callum's Candy home">Callum's <span>Candy</span></a>
+		<nav aria-label="Main navigation">
+			<a href="#shop">Shop sweets</a>
+			<a href="#about">Our story</a>
+			<a class="bag-link" href="#cart" aria-label="Shopping bag, 0 items">Bag <span class="bag-count" id="bag-count">0</span></a>
+		</nav>
+	</header>
+	<div class="halloween-banner" role="note">Happy Halloween — Free shipping on orders over £40</div>
+
+	<section class="hero" id="home">
+		<div class="hero-inner">
+		<h1>Callum's<br><span>Candy</span></h1>
+		<p class="hero-copy">Discover sour favourites, fruity pick-and-mix and mystery boxes packed with sweet surprises.</p>
+		<a class="button button-light" href="#shop">Explore the sweet shop</a>
+	</div>
+	</section>
+
+	<div class="perks" aria-label="Shop highlights">
+	<div class="perk"><span aria-hidden="true"></span> A treat for every occasion</div>
+	<div class="perk"><span aria-hidden="true"></span> Fruity, fizzy and full of flavour</div>
+	<div class="perk"><span aria-hidden="true"></span> Mystery boxes, made for sharing</div>
+	</div>
+
+	<dialog class="promo-dialog" id="promo-dialog" aria-labelledby="promo-title">
+	<div class="promo-content">
+		<button class="promo-close" id="promo-close" type="button" aria-label="Close Halloween offer">×</button>
+		<p class="promo-kicker">A seasonal sweet-shop offer</p>
+		<h2 id="promo-title">Happy Halloween</h2>
+		<p>Get 10% off all treats. Your saving is automatically applied to your bag.</p>
+		<div class="promo-code" aria-label="Offer code BOO10">BOO10</div>
+		<button class="promo-dismiss" id="promo-shop" type="button">Shop the deals</button>
+	</div>
+	</dialog>
+
+	<main>
+	<section class="shop-section" id="shop">
+		<div class="section-heading reveal">
+			<p class="kicker">Browse the collection</p>
+			<h2 class="section-title">Find your new favourite</h2>
+			<p class="section-intro">Browse the whole sweet shop or filter to find exactly the kind of treat you're after.</p>
+		</div>
+		<div class="shop-layout">
+			<div class="product-column">
+				<div class="filters" role="group" aria-label="Filter sweets">
+					<button class="filter-button" type="button" data-filter="all" aria-pressed="true">All sweets</button>
+					<button class="filter-button" type="button" data-filter="sour" aria-pressed="false">Sour</button>
+					<button class="filter-button" type="button" data-filter="fruity" aria-pressed="false">Fruity</button>
+					<button class="filter-button" type="button" data-filter="pick-mix" aria-pressed="false">Pick &amp; mix</button>
+					<button class="filter-button" type="button" data-filter="mystery" aria-pressed="false">Mystery boxes</button>
+				</div>
+				<p class="filter-status" id="filter-status" role="status" aria-live="polite">Showing all 5 treats</p>
+				<p class="cart-note" id="shop-error" role="alert"></p>
+				<div class="products" id="products" aria-label="Candy products">
+				<article class="product-card reveal" data-category="fruity pick-mix" data-stock="in">
+					<div class="product-art art-jelly" aria-hidden="true"><span>JELLY<br>BEANS</span></div>
+					<div class="product-info">
+						<p class="product-type">Pick & mix</p>
+						<h3>Jelly Bean Party</h3>
+						<p class="stock-status">In Stock</p>
+						<p class="product-description">A bright, fruity handful in all your favourite colours.</p>
+						<div class="product-buy"><span class="price">£2.50 <small>/ 100g</small></span><button class="add-button" type="button" data-product-id="1" data-name="Jelly Bean Party" data-price="2.5">Add to bag +</button></div>
+					</div>
+				</article>
+				<article class="product-card reveal" data-category="sour" data-stock="in">
+					<div class="product-art art-fizz" aria-hidden="true"><span>SOUR<br>BELTS</span></div>
+					<div class="product-info">
+						<p class="product-type">Sour & fizzy</p>
+						<h3>Sour Splash Belts</h3>
+						<p class="stock-status">In Stock</p>
+						<p class="product-description">Tangy, chewy belts with a zingy sugar sparkle.</p>
+						<div class="product-buy"><span class="price">£2.25 <small>/ 100g</small></span><button class="add-button" type="button" data-product-id="2" data-name="Sour Splash Belts" data-price="2.25">Add to bag +</button></div>
+					</div>
+				</article>
+				<article class="product-card reveal" data-category="fruity" data-stock="in">
+					<div class="product-art art-fruit" aria-hidden="true"><span>RAINBOW<br>DROPS</span></div>
+					<div class="product-info">
+						<p class="product-type">Fruity favourite</p>
+						<h3>Rainbow Drops</h3>
+						<p class="stock-status">In Stock</p>
+						<p class="product-description">Light, crunchy sweets with a crisp shell and a fruity centre.</p>
+						<div class="product-buy"><span class="price">£2.75 <small>/ 100g</small></span><button class="add-button" type="button" data-product-id="3" data-name="Rainbow Drops" data-price="2.75">Add to bag +</button></div>
+					</div>
+				</article>
+				<article class="product-card reveal" data-category="fruity pick-mix" data-stock="in">
+					<div class="product-art art-gummies" aria-hidden="true"><span>FRUITY<br>GUMMIES</span></div>
+					<div class="product-info">
+						<p class="product-type">Pick & mix</p>
+						<h3>Fruit Garden Gummies</h3>
+						<p class="stock-status">In Stock</p>
+						<p class="product-description">Soft, chewy fruit shapes in a mix of bright flavours.</p>
+						<div class="product-buy"><span class="price">£2.40 <small>/ 100g</small></span><button class="add-button" type="button" data-product-id="4" data-name="Fruit Garden Gummies" data-price="2.4">Add to bag +</button></div>
+					</div>
+				</article>
+				<article class="product-card reveal" data-category="mystery" data-stock="in">
+					<div class="product-art art-surprise" aria-hidden="true"><span>SWEET<br>SURPRISE</span></div>
+					<div class="product-info">
+						<p class="product-type">Mystery box</p>
+						<h3>Sweet Surprise Box</h3>
+						<p class="stock-status">In Stock</p>
+						<p class="product-description">A mystery mix of fruity, fizzy and chewy favourites, picked just for you.</p>
+						<div class="product-buy"><span class="price">£8.50 <small>/ box</small></span><button class="add-button" type="button" data-product-id="5" data-name="Sweet Surprise Box" data-price="8.5">Add to bag +</button></div>
+					</div>
+				</article>
+				</div>
+			</div>
+
+			<aside class="cart" id="cart" aria-labelledby="cart-title">
+				<h2 id="cart-title">Your sweet bag</h2>
+				<p class="cart-subtitle">A little treat goes a long way.</p>
+				<div id="cart-content">
+					<div class="cart-empty"><span aria-hidden="true">+</span>Your bag is waiting for a treat.</div>
+				</div>
+				<div class="cart-summary"><span>Subtotal</span><span id="cart-subtotal">£0.00</span></div>
+				<div class="cart-summary discount"><span>Halloween offer (10%)</span><span id="cart-discount">−£0.00</span></div>
+				<div class="cart-summary total"><span>Total</span><strong id="cart-total">£0.00</strong></div>
+				<p class="shipping-note" id="shipping-note">Free shipping on orders over £40. Shipping below that is confirmed by the shop.</p>
+				<button class="button checkout-button" id="checkout-button" type="button" disabled>Continue to order</button>
+				<form class="order-form" id="order-form" hidden>
+					<h3>Delivery and contact details</h3>
+					<label>Name<input name="name" autocomplete="name" minlength="2" maxlength="100" required></label>
+					<label>Email<input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+					<label>Phone<input name="phone" type="tel" autocomplete="tel" minlength="5" maxlength="40" required></label>
+					<label>Street address<input name="address1" autocomplete="address-line1" minlength="3" maxlength="160" required></label>
+					<label>Town or city<input name="town" autocomplete="address-level2" minlength="2" maxlength="100" required></label>
+					<label>Postcode<input name="postcode" autocomplete="postal-code" minlength="3" maxlength="16" required></label>
+					<button class="button" type="submit">Send order request</button>
+					<p id="order-error" role="alert"></p>
+				</form>
+				<p class="cart-note" id="cart-note" role="status" aria-live="polite">Your request is unpaid. The shop will confirm shipping and payment with you.</p>
+				</aside>
+			</div>
+		</section>
+
+		<section class="about reveal" id="about">
+			<div>
+				<p class="kicker">A little about us</p>
+				<h2>A sweet shop with a surprise in every bag.</h2>
+			</div>
+			<p>Callum's Candy is all about picking a favourite flavour, finding something new and sharing a sweet treat. Browse the collection, build your own bag or let us choose with a mystery box.<span class="about-note">SLOGAL GOES HERE</span></p>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<p><strong>Callum's Candy</strong> · PUT SLOGAN HERE</p>
+		<p>© <span id="year">2026</span> Callum's Candy. All treats, all smiles.</p>
+		<p><a href="/admin.html">Shop admin</a></p>
+	</footer>
+
+	<script src="/script.js" defer></script>
+</body>
+</html>
