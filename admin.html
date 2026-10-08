@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#123b68">
+	<title>Shop admin | Callum's Candy</title>
+	<link rel="stylesheet" href="/admin.css">
+	<script src="/admin.js" defer></script>
+</head>
+<body>
+	<header class="admin-header">
+		<a class="admin-brand" href="/">Callum's Candy <span>Admin</span></a>
+		<div class="admin-user" id="admin-user"></div>
+	</header>
+	<main class="admin-main">
+		<section class="panel login-panel" id="login-panel">
+			<p class="eyebrow">Private shop management</p>
+			<h1>Sign in to your shop</h1>
+			<p class="muted">Use the admin username and password created in your local setup.</p>
+			<form id="login-form" class="stack">
+				<label>Username<input name="username" type="text" autocomplete="username" maxlength="254" required></label>
+				<label>Password<input name="password" type="password" autocomplete="current-password" maxlength="200" required></label>
+				<button class="button" type="submit">Sign in</button>
+			</form>
+			<p class="notice" id="login-notice" role="alert"></p>
+		</section>
+
+		<section id="dashboard" hidden>
+			<div class="dashboard-heading">
+				<div>
+					<p class="eyebrow">Store control room</p>
+					<h1>Manage your shop</h1>
+					<p class="muted">Update current prices and stock. New order requests use these live values.</p>
+				</div>
+				<button class="button button-secondary" id="logout-button" type="button">Sign out</button>
+			</div>
+			<p class="notice" id="dashboard-notice" role="status" aria-live="polite"></p>
+			<section class="panel">
+				<div class="section-heading"><h2>Products &amp; inventory</h2><span class="muted">Free shipping from £40</span></div>
+				<div class="table-wrap"><table>
+					<thead><tr><th>Product</th><th>Price (£)</th><th>Stock units</th><th>Status</th><th></th></tr></thead>
+					<tbody id="products-body"></tbody>
+				</table></div>
+			</section>
+			<section class="panel orders-panel">
+				<div class="section-heading"><div><h2>Order requests</h2><p class="muted">Orders are unpaid requests. No payment is taken online.</p></div><button class="button button-secondary" id="refresh-orders" type="button">Refresh</button></div>
+				<div id="orders-list" class="orders-list"></div>
+			</section>
+		</section>
+	</main>
+	<footer>Callum's Candy · Private admin area. Do not share your sign-in details.</footer>
+</body>
+</html>
